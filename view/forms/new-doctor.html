@@ -1,0 +1,79 @@
+<?php ini_set("display_errors", 1); ?>
+<div class="content" id="content" style="margin: 0px;padding:0px;">
+    <ol class="breadcrumb pull-right">
+        <li class="breadcrumb-item"><a href="#">Início</a></li>
+        <li class="breadcrumb-item active">Novo Medico</li>
+    </ol>
+    <h1 class="page-header">Novo Medico</h1>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                <h4 class="panel-title">Informe abaixo os dados do Medico </h4></div>
+                <div class="panel-body">
+                  <!-- MEET FORM CONTROL HERE .class="simple_form new_bae" id="new_bae" data-parsley-validate="true" novalidate="novalidate" -->
+                  <!-- <div class="row"> -->
+                   <form action="<?php echo $GLOBALS['project_index']; ?>/controller/doctor.php" method="post" enctype="multipart/form-data">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <input type="hidden" name="action" value="add">
+                      <div class="form-group col-md-12">
+                        <label>Nome do Medico</label>
+                        <input type="text" class="form-control" placeholder="Nome do Medico" name="medico_nome">                  
+
+                      </div><!-- ./ form-group -->
+                      <div class="form-group col-md-12">
+                        <label>Especialidade</label>
+                        <input type="text" name="medico_especialidade" class="form-control" placeholder="Especialidade"/>
+                      </div>
+
+                      <div class="form-group col-md-12">
+                        <label>Endereço</label>
+                        <input type="text" name="medico_endereco" class="form-control" placeholder="Endereco" required/>
+                      </div>
+
+                      
+                    </div><!-- ./ col-md-6 -->
+                    
+                    <div class="col-md-6">
+
+                    <div class="form-group col-md-12">
+                      <label>Telefone</label>
+                      <input type="text" name="medico_telefone" class="form-control" placeholder="Telefone ou Celular" required/>
+                      </div>
+                      <!-- <img src="http://www.barramansa.rj.gov.br/transparencia/images/pages/portal_transp.png" class="img-responsive" /> -->
+                      <div class="form-group col-md-12">
+                        <label>CRM</label>
+                        <input type="text" name="medico_crm" class="form-control" placeholder="Crc" required/>
+                      </div>                      
+
+                      
+                      <hr />
+                      <div class="row">                         
+                        <div class="col-md-12">
+                          <p class="text-right"><button type="submit" class="btn btn-success"><i class="fa fa-check-circle-o"></i> <b>Cadastrar Médico</b></button></p>
+                        </div><!-- ./ col-md-6 -->
+                      </div><!-- ./ row -->
+                    </form>
+                    </div><!-- . col-md-6 -->
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    function optionCheck(){
+        var option = document.getElementById("secretary").value;
+        if(option == "other"){
+            document.getElementById("hiddenDiv").style.visibility ="visible";
+            document.getElementById("secretary_name2").required = true; 
+            document.getElementById("secretary_name2").disabled = false; 
+        }else{
+            document.getElementById("hiddenDiv").style.visibility ="hidden";          
+            document.getElementById("secretary_name2").disabled = true; 
+        }        
+    }
+</script>

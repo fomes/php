@@ -1,0 +1,102 @@
+<?php ini_set("display_errors", 1); ?>
+<div class="content" id="content" style="margin: 0px;padding:0px;">
+    <ol class="breadcrumb pull-right">
+        <li class="breadcrumb-item"><a href="#">Início</a></li>
+        <li class="breadcrumb-item active">Publicações de Leis</li>
+    </ol>
+    <h1 class="page-header">Publicações de Leis</h1>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-success">
+                <div class="panel-heading">
+                <h4 class="panel-title">Informe abaixo os dados da Lei</h4></div>
+                <div class="panel-body">
+                  <!-- MEET FORM CONTROL HERE .class="simple_form new_bae" id="new_bae" data-parsley-validate="true" novalidate="novalidate" -->
+                  <!-- <div class="row"> -->
+                   <form action="<?php echo $GLOBALS['project_index']; ?>/controller/new-law.php" method="post" enctype="multipart/form-data">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <input type="hidden" name="user_id" value="<?=$user->id_user; ?>">
+                      <div class="form-group col-md-12">
+                        <label>Tipo do Documento</label>
+                        <input type="text" class="form-control" disabled value="LEI MUNICIPAL">
+                        <!-- <input type="hidden" name="documentfile_type" value="pcs" class="form-control" disabled> -->
+
+                      </div><!-- ./ form-group -->
+                      <div class="form-group col-md-12">
+                        <label>Titulo do Documento</label>
+                        <input type="text" name="law_name" class="form-control" value="LEI N°"/>
+                      </div>
+
+                      <div class="form-group col-md-12">
+                        <label>Número e Ano da LEI</label>
+                        <input type="text" name="law_number" class="form-control" value="/<?=date('Y');?> " required/>
+                      </div>
+
+                      <div class="form-group col-md-12">
+                        <label>Descrição da LEI</label>
+                        <textarea name="law_describe" class="form-control" placeholder="Descreva com poucas palvras a LEI" rows="6"></textarea> 
+                      </div>
+
+                      
+                    </div><!-- ./ col-md-6 -->
+                    <div class="col-md-6">
+                      <!-- <img src="http://www.barramansa.rj.gov.br/transparencia/images/pages/portal_transp.png" class="img-responsive" /> -->
+
+                      
+
+                      <div class="form-group col-md-12">
+                          <label>Data de Publicação do documento</label>
+                          <input type="date" name="law_publication" class="form-control" required>
+                      </div>
+                      
+
+                      <div class="form-group col-md-12">
+                        <label>Ano de Exercício</label>                        
+                        <select name="law_year" class="form-control">
+                              <option selected disabled>Selecione</option>
+                              <?php for ($y=date('Y'); $y >= 1950 ; $y--): ?>
+                              <option><?=$y;?></option>
+                              <?php endfor; ?>                          
+                        </select>
+                      </div>
+
+                      <div class="form-group col-md-12">
+                        <label>Arquivo da LEI</label>
+                        <input type="file" name="law_archive" class="form-control" required/>
+                      </div>
+                        
+                      <hr />
+                      <div class="row">
+                        <!-- <div class="col-md-6">
+                          <input type="checkbox" name="continue_register" value="yes" /> Continuar cadastrando documentos após este documento
+                        </div><!-- ./ col-md-6 --> 
+                        <div class="col-md-12">
+                          <p class="text-right"><button type="submit" class="btn btn-success"><i class="fa fa-check-circle-o"></i> <b>Cadastrar Documento</b></button></p>
+                        </div><!-- ./ col-md-6 -->
+                      </div><!-- ./ row -->
+                    </form>
+
+
+                    </div><!-- . col-md-6 -->
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    function optionCheck(){
+        var option = document.getElementById("secretary").value;
+        if(option == "other"){
+            document.getElementById("hiddenDiv").style.visibility ="visible";
+            document.getElementById("secretary_name2").required = true; 
+            document.getElementById("secretary_name2").disabled = false; 
+        }else{
+            document.getElementById("hiddenDiv").style.visibility ="hidden";          
+            document.getElementById("secretary_name2").disabled = true; 
+        }        
+    }
+</script>

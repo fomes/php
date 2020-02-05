@@ -1,0 +1,211 @@
+<?php if($user->office_id == 20){ ?>
+  <div class="content-wrapper">
+      <!-- Content Header (Page header) -->
+      <section class="content-header">
+        <h1>
+          <i class="fa fa-dashboard"></i> Painel de Controle
+          <small>Ouvidoria</small>
+        </h1>
+        <ol class="breadcrumb">
+          <li><a href="#"><i class="fa fa-dashboard"></i> Inicio</a></li>
+          <li class="active">Painel de Controle</li>
+        </ol>
+      </section>
+      <!-- Main content -->
+      <section class="content">
+        <!-- Small boxes (Stat box) -->
+        <div class="row">
+          
+          <div class="col-lg-3 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-green">
+              <div class="inner">
+                <h3><?=count($comments);?><sup style="font-size: 20px"></sup></h3>
+                <p>Solicitações de Ouvidoria</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-images"></i>
+              </div>
+              <a href="?op=manager-coments" class="small-box-footer">Gerenciar Solicitações<i class="fa fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          
+        </div>
+        <!-- /.row -->        
+      </section>
+      <!-- /.content -->
+  </div>
+<?php }else{  ?>
+  
+    <div class="row">
+        <h2 align="center" class="content-title">Nossos Serviços</h2>
+        <p align="center" class="content-desc">Veja abaixo alguns serviços que estão disponíveis</p>
+        <!--begin col-4-->
+        <div class="col-md-4 col-sm-12">
+            <div class="service">
+                <div class="icon bg-theme bounceIn contentAnimated finishAnimated" data-animation="true" data-animation-type="bounceIn"><i class="fa fa-file-alt"></i></div>
+                <div class="info">
+                    <h4 class="title">Nota Fiscal Eletrônica</h4>
+                    <p class="desc">Nesta área você pode gerar e emitir Notas Fiscais de Serviço Eletrônicas e gerenciar as Declarações Mensais de Serviços além de outras atividades relacionadas ao Imposto Sobre Serviços ISS.</p>
+                    <p class="link"><a target="_blank" href="http://iss.speedgov.com.br/maracanau"><i class="fa fa-external-link-alt"></i><span> NFS-E (Acesso Nota Fiscal)</span></a></p>
+                </div>
+            </div>
+        </div>
+        <!--end col-4-->
+        <!--begin col-4-->
+        <div class="col-md-4 col-sm-12">
+            <div class="service">
+                <div class="icon bg-theme bounceIn contentAnimated finishAnimated" data-animation="true" data-animation-type="bounceIn"><i class="fa fa-file"></i></div>
+                <div class="info">
+                    <h4 class="title">Emissão de Certidões</h4>
+                    <p class="desc">Gere Certidões Negativas de Débitos Municipais e todas as demais Certidões necessárias à regularidade fiscal sua, da sua empresa ou dos seus imóveis.</p>
+                </div>
+            </div>
+        </div>
+        <!--end col-4-->
+        <!--begin col-4-->
+        <div class="col-md-4 col-sm-12">
+            <div class="service">
+                <div class="icon bg-theme bounceIn contentAnimated finishAnimated" data-animation="true" data-animation-type="bounceIn"><i class="fa fa-print"></i></div>
+                <div class="info">
+                    <h4 class="title">Impressão de Documentos</h4>
+                    <p class="desc">Utilize esta área para imprimir documentos tais como Alvarás e Notas Fiscais e Guia de ITBI.</p>
+                </div>
+            </div>
+        </div>
+        <!--end col-4-->
+    </div>
+
+<?php } ?>
+
+  <?php /* 
+  <div class="content-wrapper">
+      <!-- Content Header (Page header) -->
+      <section class="content-header">
+        <h1>
+          <i class="fa fa-dashboard"></i> Painel de Controle
+          <small>Administrativo</small>
+        </h1>
+        <ol class="breadcrumb">
+          <li><a href="#"><i class="fa fa-dashboard"></i> Inicio</a></li>
+          <li class="active">Painel de Controle</li>
+        </ol>
+      </section>
+      <!-- Main content -->
+      <section class="content">
+        <!-- Small boxes (Stat box) -->
+        <div class="row">
+          
+          <div class="col-lg-3 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-green">
+              <div class="inner">
+                <h3><?=count($banners);?><sup style="font-size: 20px"></sup></h3>
+                <p>Banners Principais</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-images"></i>
+              </div>
+              <a href="?op=manager-banners" class="small-box-footer">Gerenciar Banners<i class="fa fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+
+
+          <div class="col-lg-3 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-aqua">
+              <div class="inner">
+                <h3><?=count($pubs);?></h3>
+                <p>Notícias</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-document"></i>
+              </div>
+              <a href="?op=manager-publications" class="small-box-footer">Gerenciar Notícias <i class="fa fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <!-- ./col -->
+          
+          <!-- ./col -->
+          <div class="col-lg-3 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-yellow">
+              <div class="inner">
+                <h3>4</h3>
+                <p>Vídeos</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-camera"></i>
+              </div>
+              <a href="?op=manager-videos" class="small-box-footer">Gerenciar Vídeos <i class="fa fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <!-- ./col -->
+          <div class="col-lg-3 col-xs-6">
+            <!-- small box -->
+            <div class="small-box bg-red">
+              <div class="inner">
+                <h3><?=count($secs);?></h3>
+                <p>Secretarias</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-home"></i>
+              </div>
+              <a href="?op=manager-secretary" class="small-box-footer">Gerenciar Secretarias <i class="fa fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <!-- ./col -->
+        </div>
+        <!-- /.row -->
+        <div class="row">
+          <div class="col-md-12">
+            
+            <div class="box">
+              <div class="box-header">
+                <i class="fa fa-bar-chart"></i> Acessos do site(análise semanal)
+              </div>
+              <div class="box-body">
+                <div id="access-mouth" style="height: 400px;"></div>
+                <script type="text/javascript">
+                  $(document).ready(function() {
+                      // chamada dos dados
+                      $.ajax({
+                        url: "controller/ajax.php",
+                        type: "post",
+                        dataType: "json",
+                        data: {
+                          method: "data-access",
+                        },
+                        success: function(ret){
+                          
+                          var data_access = ret;
+                          new Morris.Bar({
+                            element: 'access-mouth',
+                            data: [
+                              { day: "<?php echo date('d/m', strtotime('-7 days')); ?>", value: data_access[6].less7 },
+                              { day: "<?php echo date('d/m', strtotime('-6 days')); ?>", value: data_access[5].less6 },
+                              { day: "<?php echo date('d/m', strtotime('-5 days')); ?>", value: data_access[4].less5 },
+                              { day: "<?php echo date('d/m', strtotime('-4 days')); ?>", value: data_access[3].less4 },
+                              { day: "<?php echo date('d/m', strtotime('-3 days')); ?>", value: data_access[2].less3 },
+                              { day: "<?php echo date('d/m', strtotime('-2 days')); ?>", value: data_access[1].less2 },
+                              { day: "<?php echo date('d/m', strtotime('-1 day')); ?>", value: data_access[0].less1 },
+                              { day: "Hoje", value: data_access.today }
+                            ],
+                            xkey: 'day',
+                            ykeys: ['value'],
+                            labels: ['Acessos']
+                          });
+                          
+                          
+                        }
+                      })
+                     
+                  })
+                </script>
+              </div><!-- ./ box-body -->
+            </div><!-- ./ box -->
+          </div>
+        </div>
+      </section>
+      <!-- /.content -->
+  </div>

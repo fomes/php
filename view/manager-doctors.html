@@ -1,0 +1,190 @@
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#table-manager').DataTable({
+            "language":{
+                "sEmptyTable": "Nenhum registro encontrado",
+                "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+                "sInfoEmpty": "Mostrando 0 até 0 de 0 registros",
+                "sInfoFiltered": "(Filtrados de _MAX_ registros)",
+                "sInfoPostFix": "",
+                "sInfoThousands": ".",
+                "sLengthMenu": "_MENU_ resultados por página",
+                "sLoadingRecords": "Carregando...",
+                "sProcessing": "Processando...",
+                "sZeroRecords": "Nenhum registro encontrado",
+                "sSearch": "Pesquisar",
+                "oPaginate": {
+                    "sNext": "Próximo",
+                    "sPrevious": "Anterior",
+                    "sFirst": "Primeiro",
+                    "sLast": "Último"
+                },
+                "oAria": {
+                    "sSortAscending": ": Ordenar colunas de forma ascendente",
+                    "sSortDescending": ": Ordenar colunas de forma descendente"
+                },
+                "select": {
+                    "rows": {
+                        "_": "Selecionado %d linhas",
+                        "0": "Nenhuma linha selecionada",
+                        "1": "Selecionado 1 linha"
+                    }
+                }
+            }
+        //"fixedHeader": true
+        });
+    });
+</script>
+
+<?php ini_set("display_errors", 1); ?>
+<ol class="breadcrumb pull-right">
+    <li class="breadcrumb-item"><a href="index.html">Inicio</a></li>
+    <li class="breadcrumb-item active">Listar Médicos</li>
+</ol>
+
+<h1 class="page-header">Listar Médicos</h1>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-success">
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <div class="box-body">
+                      <?php if($doctors){ ?>
+                        <table class="table table-hover table-bordered " id="table-manager">
+                          <thead>
+                            <tr>
+                               <th>N°</th> 
+                              <th>Nome:</th>
+                              <th>Especialidade</th>                   
+                              <th>Telefone</th>
+                              <th>Endereço</th>
+                              <th>CRM</th>
+                              <!-- <th>PDFs</th> -->
+                              <th><i class="fa fa-gears"></i></th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                          <?php
+                            $count = 0;
+                            foreach($doctors as $r):
+                              $count++;
+                              $count = ($count < 10) ? "0".$count : $count;
+                              
+                          ?>
+                            <tr>
+                              <td><b><?php echo $count; ?></b></td>
+                              <td><?=$r['medico_nome'];?></td>
+                              <td><?=$r['medico_especialidade'];?></td>
+                              <td><?=$r['medico_telefone'];?></td>
+                              <td><?=$r['medico_endereco'];?></td>
+                              <td><?=$r['medico_crm'];?></td>
+
+                              <td>
+
+                                <button data-toggle="modal" data-target="#edit-element-<?=$r['id_medico']; ?>" class="btn btn-secondary" type="button" title="Editar Usuário"><i class="fa fa-edit"></i>  </button>
+                                <button type="button" data-toggle="modal" data-target="#delete-element-<?=$r['id_medico']; ?>" class="btn btn-secondary" title="Deletar PCS"><i class="fa fa-trash"></i>  </button>
+                                
+                              </td>
+                            </tr>
+
+
+                            <!-- EDITAR -->
+                          <div class="modal fade" id="edit-element-<?php echo $r['id_medico']; ?>" tabindex="-1" role="dialog">
+                            <div class="modal-dialog" role="document">
+                              <div class="modal-content">
+                              <form action="<?php echo $GLOBALS['project_index']; ?>/controller/doctor.php" method="post" enctype="multipart/form-data">
+                                <div class="modal-header">
+                                  <h34 class="modal-title">Editar Médico </h3>
+                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                </div>
+                                <div class="modal-body">
+                                <!-- INICIO DO FORM -->
+                                <div class="col-md-12">
+                                      <input type="hidden" name="action" value="update">
+
+                                        <input type="hidden" name="id_medico" value="<?=$r['id_medico'];?>">
+
+                                        <div class="form-group col-md-12">
+                                          <label>Nome Completo:</label>
+                                          <input type="text" name="medico_nome" class="form-control" placeholder="Nome Completo" value="<?=$r['medico_nome'];?>">
+                                        </div>
+
+                                        <div class="form-group col-md-12">
+                                          <label>Especialidade:</label>
+                                          <input type="text" name="medico_especialidade" class="form-control" placeholder="Especialidade" value="<?=$r['medico_especialidade'];?>"/>
+                                        </div>
+
+                                        <div class="form-group col-md-12">
+                                          <label>EndereÃ§o:</label>                        
+                                          <input type="text" name="medico_endereco" class="form-control" placeholder="Endereco" value="<?=$r['medico_endereco'];?>" required>
+                                        </div>
+
+                                        <div class="form-group col-md-12">
+                                          <label>Telefone:</label>
+                                          <input type="text" name="medico_telefone" class="form-control" placeholder="Telefone ou Celular" required value="<?=$r['medico_telefone'];?>"/>
+                                        </div>
+
+                                        <div class="form-group col-md-12">
+                                          <label>CRN:</label>                        
+                                          <input type="text" name="medico_crm" class="form-control" placeholder="CRN" value="<?=$r['medico_crm'];?>" required>
+                                        </div>
+                                    
+                                        <hr>
+                                      </div>
+                                      <!-- FINAL DO FORM -->
+                                        
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                  <button type="submit" class="btn btn-primary"><i class="fa fa-check-circle-o"></i> <b>Salvar Alterações</b></button>
+                                </div>
+                              </form>
+                              </div>
+                            </div>
+                          </div>
+                            
+
+                            <!-- DELETAR PCS -->
+                            <div class="modal fade" id="delete-element-<?=$r['id_medico']; ?>" tabindex="-1" role="dialog">
+                              <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <h3 class="modal-title">Deletar MÃ©dico?</h3>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                      <span aria-hidden="true">&times;</span>
+                                    </button>
+                                  </div>
+                                  <div class="modal-body">
+                                    <blockquote>
+                                      Excluir UsuÃ¡rio? Essa operaÃ§Ã£o Ã© irreversivel. Tem certeza?
+                                    </blockquote>
+                                  </div>
+                                  <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                    <a href="<?php echo $GLOBALS['project_index']; ?>/controller/doctor.php?id_medico=<?php echo $r['id_medico']; ?>&action=delete" class="btn btn-danger"><i class="fa fa-trash"></i> <b>Sim,deletar isto</b></a>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          <?php endforeach; ?>
+                          </tbody>
+                          <tfoot><a href="?op=new-user" class="btn btn-success"><i class="fa fa-plus"></i> <b>Cadastrar novo UsuÃ¡rio</b></a><hr></tfoot>
+
+                        </table>
+                        <?php }else{ ?>
+                        <?php //getMessageError('vazio!','NÃƒÆ’Ã‚Â£o hÃƒÆ’Ã‚Â¡ documentos cadastrados na base de dados referente a seu filtro de busca'); ?>
+                        <hr />
+                        <div class="pull-right">
+                            <a href="?op=new-medico" class="btn btn-success"><i class="fa fa-plus"></i> <b>Cadastrar um novo documento</b></a>
+                        </div>
+                        <?php } ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

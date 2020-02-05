@@ -1,0 +1,38 @@
+USUÁRIOS 
+
+	id_usuario;
+	usuario_nome;
+	usuario_email;
+	usuario_senha;
+	usuario_contato;
+	usuario_cpf;
+	usuario_dt_nasc;
+	usuario_endereco;
+	usuario_criacao;
+	perfil_id;
+
+PERFIS
+	
+	id_perfil;
+	perfil_nome;
+	perfil_pagina;
+
+MÉDICO
+	
+	id_medico;
+	medico_nome;
+	medico_especialidade;
+	medico_endereco;
+	medico_telefone;
+	medico_crm;
+	medico_criacao;
+
+AGENDAMENTO
+	
+	id_agendamento;
+	agendamento_horario;
+	medico_id;
+	usuario_id;
+
+
+

@@ -1,0 +1,220 @@
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#table-manager').DataTable({
+            "language":{
+                "sEmptyTable": "Nenhum registro encontrado",
+                "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+                "sInfoEmpty": "Mostrando 0 até 0 de 0 registros",
+                "sInfoFiltered": "(Filtrados de _MAX_ registros)",
+                "sInfoPostFix": "",
+                "sInfoThousands": ".",
+                "sLengthMenu": "_MENU_ resultados por página",
+                "sLoadingRecords": "Carregando...",
+                "sProcessing": "Processando...",
+                "sZeroRecords": "Nenhum registro encontrado",
+                "sSearch": "Pesquisar",
+                "oPaginate": {
+                    "sNext": "Próximo",
+                    "sPrevious": "Anterior",
+                    "sFirst": "Primeiro",
+                    "sLast": "Último"
+                },
+                "oAria": {
+                    "sSortAscending": ": Ordenar colunas de forma ascendente",
+                    "sSortDescending": ": Ordenar colunas de forma descendente"
+                },
+                "select": {
+                    "rows": {
+                        "_": "Selecionado %d linhas",
+                        "0": "Nenhuma linha selecionada",
+                        "1": "Selecionado 1 linha"
+                    }
+                }
+            }
+        //"fixedHeader": true
+        });
+    });
+</script>
+
+<?php ini_set("display_errors", 1); ?>
+<ol class="breadcrumb pull-right">
+    <li class="breadcrumb-item"><a href="index.html">Inicio</a></li>
+    <li class="breadcrumb-item active">Listar Usuários</li>
+</ol>
+<h1 class="page-header">Listar Usuários</h1>
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-success">
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <div class="box-body">
+                      <?php if($users){ ?>
+                      
+                      <table class="table table-hover table-bordered" id="table-manager">
+                        <thead>
+                          <tr>
+                            <th>#</th>
+                            <th>Nome</th>
+                            <th>Email</th>                   
+                            <th>Tipo Acesso</th>
+                            <!-- <th>Nascimento</th> -->
+                            <th>Contato</th>
+                            <th>CPF</th>
+                            <th><i class="fa fa-gears"></i></th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                        <?php
+                          $count = 0;
+                          foreach($users as $r):
+                            $count++;
+                            $count = ($count < 10) ? "0".$count : $count;
+                        ?>
+                          <tr>
+                            <td><b><?php echo $count; ?></b></td>
+                            <td><?=$r['usuario_nome'];?></td>
+                            <td><?=$r['usuario_email'];?></td>
+                            <td><?=$r['perfil_nome'];?></td>
+                            <!-- <td><?=$r['usuario_dt_nasc'];?></td> -->
+                            <td><?=$r['usuario_contato'];?></td>
+                            <td><?=$r['usuario_cpf'];?></td>
+                            
+                            <td>
+                                                            
+                              <button data-toggle="modal" data-target="#edit-element-<?=$r['id_usuario']; ?>" class="btn btn-secondary" type="button" title="Editar USUÁRIO"><i class="fa fa-edit"></i> <!-- <b>Editar</b> --></button>
+                              
+                              <button type="button" data-toggle="modal" data-target="#delete-element-<?=$r['id_usuario']; ?>" class="btn btn-secondary" title="Deletar PCS"><i class="fa fa-trash"></i> <!-- <b>Deletar</b> --></button>
+                              
+                            </td>
+                          </tr>
+
+                          
+                          <!-- EDITAR -->
+                          <div class="modal fade" id="edit-element-<?php echo $r['id_usuario']; ?>" tabindex="-1" role="dialog">
+                            <div class="modal-dialog" role="document">
+                              <div class="modal-content">
+                              <form action="<?php echo $GLOBALS['project_index']; ?>/controller/user.php" method="post" enctype="multipart/form-data">
+                                <div class="modal-header">
+                                  <h34 class="modal-title">Editar Usuário </h3>
+                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                </div>
+                                <div class="modal-body">
+                                <!-- INICIO DO FORM -->
+                                <div class="row">
+                                  <div class="col-md-6">
+                                    <input type="hidden" name="action" value="update">
+
+                                    <input type="hidden" name="id_usuario" value="<?=$r['id_usuario'];?>">
+
+                                    <div class="form-group col-md-12">
+                                      <label>Nome do Usuário</label>
+                                      <input type="text" class="form-control" placeholder="Nome do Usuário" name="usuario_nome" value="<?=$r['usuario_nome'];?>">                  
+
+                                    </div><!-- ./ form-group -->
+                                    <div class="form-group col-md-12">
+                                      <label>Email</label>
+                                      <input type="email" name="usuario_email" class="form-control" placeholder="Email" value="<?=$r['usuario_email'];?>"/>
+                                    </div>
+
+                                    <div class="form-group col-md-12">
+                                      <label>Senha</label>
+                                      <input type="password" name="usuario_senha" class="form-control" placeholder="Senha" />
+                                    </div>
+
+                                    <div class="form-group col-md-12">
+                                      <label>Contato</label>
+                                      <input type="text" name="usuario_contato" class="form-control" placeholder="Telefone ou Celular" required value="<?=$r['usuario_contato'];?>"/>
+                                    </div>
+                                    
+                                  </div><!-- ./ col-md-6 -->
+                                  <div class="col-md-6">
+                                    <!-- <img src="http://www.barramansa.rj.gov.br/transparencia/images/pages/portal_transp.png" class="img-responsive" /> -->
+                                    <div class="form-group col-md-12">
+                                      <label>CPF</label>
+                                      <input type="text" name="usuario_cpf" class="form-control" placeholder="CPF" value="<?=$r['usuario_cpf'];?>" required/>
+                                    </div>                      
+
+                                    <div class="form-group col-md-12">
+                                        <label>Data de Nascimento</label>
+                                        <input type="date" name="usuario_dt_nasc" class="form-control" required value="<?=$r['usuario_dt_nasc'];?>">
+                                    </div>
+
+                                    <div class="form-group col-md-12">
+                                      <label>Endereco</label>
+                                      <input type="text" name="usuario_endereco" class="form-control" placeholder="Endereço" required value="<?=$r['usuario_endereco'];?>"/>
+                                    </div>
+
+                                                          
+
+                                    <div class="form-group col-md-12">
+                                      <label>Tipo do Perfil</label>                        
+                                      <select name="perfil_id" class="form-control" required>
+                                            <option value="<?=$r['id_perfil'];?>" selected >-- Atual: <?=$r['perfil_nome'];?> --
+                                            </option>
+                                            <?php foreach ($profiles as $p): ?>
+                                              <option value="<?=$p['id_perfil'];?>">
+                                                <?=$p['perfil_nome'];?>
+                                              </option>
+                                            <?php endforeach; ?>  
+                                      </select>
+                                    </div>
+
+                                    <hr />
+                                    
+                                  </div><!-- . col-md-6 -->
+                                </div>
+                                <!-- FINAL DO FORM -->
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                  <button type="submit" class="btn btn-primary"><i class="fa fa-check-circle-o"></i> <b>Salvar Alterações</b></button>
+                                </div>
+                              </form>
+                              </div>
+                            </div>
+                          </div>
+
+                          <!-- DELETAR PCS -->
+                          <div class="modal fade" id="delete-element-<?=$r['id_usuario']; ?>" tabindex="-1" role="dialog">
+                            <div class="modal-dialog" role="document">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h3 class="modal-title">Deletar Usuário?</h3>
+                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                </div>
+                                <div class="modal-body">
+                                  <blockquote>
+                                    Excluir Documento? Essa operaÃ§Ã£o Ã© irreversÃ­vel. Tem certeza?
+                                  </blockquote>
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                  <a href="<?php echo $GLOBALS['project_index']; ?>/controller/user.php?id_usuario=<?php echo $r['id_usuario']; ?>&action=delete" class="btn btn-danger"><i class="fa fa-trash"></i> <b>Sim,deletar isto</b></a>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        <?php endforeach; ?>
+                        </tbody>
+                        <tfoot>
+                          <a href="?op=new-user" class="btn btn-success"><i class="fa fa-plus"></i><b>Cadastrar novo Usuário</b></a><hr>
+                        </tfoot>
+                      </table>
+                      <?php }else{ ?>
+                      <?php getMessageError('vazio!','NÃ£o hÃ¡ documentos cadastrados na base de dados referente a seu filtro de busca'); ?>
+                      <hr />
+                      <div class="pull-right">
+                          <a href="?op=new-user" class="btn btn-success"><i class="fa fa-plus"></i> <b>Cadastrar um novo documento</b></a>
+                        </div>
+                      <?php } ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
